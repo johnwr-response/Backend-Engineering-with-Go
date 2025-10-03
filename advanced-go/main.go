@@ -66,16 +66,6 @@ func main() {
 	nt := &NormalTruck{id: "1"}
 	et := &ElectricTruck{id: "2"}
 
-	person := make(map[string]any)
-	person["name"] = "John Doe"
-	person["age"] = 42
-	age, exists := person["age"].(int)
-	if !exists {
-		log.Fatal("age is not an integer")
-		return
-	}
-	log.Println(age)
-
 	err := processTruck(nt)
 	if err != nil {
 		log.Fatalf("Error processing truck %s\n", err)
