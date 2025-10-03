@@ -56,6 +56,7 @@
 - And so, in this mini course module we'll get hands-on experience with a project-based approach **by building a Truck Distribution Center simulation**
   which we'll gradually increment with advanced concepts.
 - **Disclaimer**: Go basic syntax is not covered on this section, but you can quick and easily learn it in the Go's official docs. (I can record one by popular demand as well)
+### Effective Error Handling
 
 ## Building a Server from TCP to HTTP
 
