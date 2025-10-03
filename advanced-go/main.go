@@ -16,7 +16,10 @@ type Truck struct {
 }
 
 func (t Truck) LoadCargo() error {
-	return ErrTruckNotFound
+	return nil
+}
+func (t Truck) UnLoadCargo() error {
+	return nil
 }
 
 // processTruck handles the loading and unloading of a truck.
@@ -26,8 +29,11 @@ func processTruck(truck Truck) error {
 	if err := truck.LoadCargo(); err != nil {
 		return fmt.Errorf("Error loading cargo %s: %w\n", truck.id, err)
 	}
+	if err := truck.UnLoadCargo(); err != nil {
+		return fmt.Errorf("Error unloading cargo %s: %w\n", truck.id, err)
+	}
 
-	return ErrNotImplemented
+	return nil
 }
 
 func main() {
@@ -39,31 +45,7 @@ func main() {
 
 	for _, truck := range trucks {
 		fmt.Printf("Truck %s arrived.\n", truck.id)
-		err := processTruck(truck)
-		if err != nil {
-			log.Fatalf("Error processing truck %s : %s\n", truck.id, err)
-		}
-		switch err {
-		case ErrTruckNotFound:
-			return
-		case ErrNotImplemented:
-			return
-		default:
-			log.Fatal(err)
-		}
-
 		if err := processTruck(truck); err != nil {
-			if errors.Is(err, ErrNotImplemented) {
-				// we do this
-			}
-			if errors.Is(err, ErrTruckNotFound) {
-				// we do this
-			}
-
-			if errors.Is(err, ErrTruckNotFound) {
-				log.Fatal("TRUE")
-			}
-
 			log.Fatalf("Error processing truck %s : %s\n", truck.id, err)
 		}
 	}
