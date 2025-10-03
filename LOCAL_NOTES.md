@@ -30,6 +30,24 @@
   - Goroutines & Channels: https://youtu.be/3QESpVGiiB8?si=kqpETtKp73Abyiyw
 
 ## Project Architecture
+### Design Principles for a REST API
+- [The Twelve-Factor App](https://12factor.net)
+  - I. Codebase : One codebase tracked in revision control, many deploys
+  - II. Dependencies : Explicitly declare and isolate dependencies
+  - III. Config : Store config in environment
+  - IV. Backing services : Treat backing services as attached resources
+  - V. Build, release, run : Strictly separate build and run stages
+  - VI. Processes : Execute the app as one or more stateless processes
+  - VII. Port binding : Export services via port binding
+  - VIII. Concurrency : Scale out via the process model
+  - IX. Disposability : Maximize robustness with fast startup and graceful shutdown
+  - X. Dev/prod parity : Keep development, staging, and production as similar as possible
+  - XI. Logs : Treat logs as event streams
+  - XII. Admin processes : Run admin/management tasks as one-off processes
+
+
+- [Roy Fielding REST Dissertation](https://ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf)
+- [Richardson Maturity Model](https://martinfowler.com/articles/richardsonMaturityModel.html)
 
 ## Mini Course: Advanced Go
 
