@@ -57,6 +57,7 @@
   which we'll gradually increment with advanced concepts.
 - **Disclaimer**: Go basic syntax is not covered on this section, but you can quick and easily learn it in the Go's official docs. (I can record one by popular demand as well)
 ### Effective Error Handling
+### Interfaces
 
 ## Building a Server from TCP to HTTP
 
