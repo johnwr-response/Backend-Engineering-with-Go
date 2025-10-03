@@ -44,12 +44,18 @@
   - X. Dev/prod parity : Keep development, staging, and production as similar as possible
   - XI. Logs : Treat logs as event streams
   - XII. Admin processes : Run admin/management tasks as one-off processes
-
-
 - [Roy Fielding REST Dissertation](https://ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf)
 - [Richardson Maturity Model](https://martinfowler.com/articles/richardsonMaturityModel.html)
 
 ## Mini Course: Advanced Go
+### Introduction
+**What is this module?**
+- This is an **optional mini course** inside the Backend Engineering with Go full course.
+- It's an introductory material where we **cover the hard parts of Go** before diving into the world of building production web APIs.
+- Although Go is a pretty straight forward language to learn, it has some advanced features that are very **important to learn and get them right** from the start.
+- And so, in this mini course module we'll get hands-on experience with a project-based approach **by building a Truck Distribution Center simulation**
+  which we'll gradually increment with advanced concepts.
+- **Disclaimer**: Go basic syntax is not covered on this section, but you can quick and easily learn it in the Go's official docs. (I can record one by popular demand as well)
 
 ## Building a Server from TCP to HTTP
 
