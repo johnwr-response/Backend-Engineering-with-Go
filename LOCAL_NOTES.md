@@ -65,6 +65,9 @@
 - The ampersand (``&``) returns a reference to a memory location
 - The star (``*``) dereferences the variable to return the value
 ### Goroutines
+### Context and Timeouts
+- Context is immutable! You need to make a new context from a previous context if you want to change it
+- It is a convention to send the context as the first argument
 
 ## Building a Server from TCP to HTTP
 

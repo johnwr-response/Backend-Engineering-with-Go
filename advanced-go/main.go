@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"log"
@@ -8,6 +9,9 @@ import (
 	"time"
 )
 
+type contextKey string
+
+var UserIdKey contextKey = "userID"
 var (
 	ErrNotImplemented = errors.New("not implemented")
 	ErrTruckNotFound  = errors.New("truck not found")
@@ -49,11 +53,29 @@ func (e *ElectricTruck) UnloadCargo() error {
 }
 
 // processTruck handles the loading and unloading of a truck.
-func processTruck(truck Truck) error {
+func processTruck(ctx context.Context, truck Truck) error {
 	fmt.Printf("started processing truck %+v\n", truck)
 
-	// Simulate some processing time
-	time.Sleep(1 * time.Second)
+	//// Simulate some processing time by adding a sleep
+	//time.Sleep(1 * time.Second)
+
+	/*
+		// how to access the userID from context
+		userID := ctx.Value(UserIdKey).(int)
+		log.Println(userID)
+	*/
+
+	ctx, cancel := context.WithTimeout(ctx, 2*time.Second)
+	defer cancel()
+
+	// simulate a long-running process
+	delay := 3 * time.Second
+	select {
+	case <-ctx.Done():
+		return ctx.Err()
+	case <-time.After(delay):
+		break
+	}
 
 	err := truck.LoadCargo()
 	if err != nil {
@@ -70,7 +92,7 @@ func processTruck(truck Truck) error {
 }
 
 // processFleet demonstrates concurrent processing of multiple trucks
-func processFleet(trucks []Truck) error {
+func processFleet(ctx context.Context, trucks []Truck) error {
 	// Running synchronously
 	/*
 		for _, truck := range trucks {
@@ -84,7 +106,7 @@ func processFleet(trucks []Truck) error {
 	for _, truck := range trucks {
 		wg.Add(1)
 		go func(truck Truck) {
-			if err := processTruck(truck); err != nil {
+			if err := processTruck(ctx, truck); err != nil {
 				log.Println(err)
 			}
 			wg.Done()
@@ -96,41 +118,22 @@ func processFleet(trucks []Truck) error {
 }
 
 func main() {
+	ctx := context.Background()
+	ctx = context.WithValue(ctx, UserIdKey, 42)
+
 	fleet := []Truck{
 		&NormalTruck{id: "NT1", cargo: 0},
 		&ElectricTruck{id: "ET1", cargo: 0, battery: 100},
 		&NormalTruck{id: "NT2", cargo: 0},
 		&ElectricTruck{id: "ET2", cargo: 0, battery: 100},
 		&NormalTruck{id: "NT1", cargo: 0},
-		&ElectricTruck{id: "ET1", cargo: 0, battery: 100},
-		&NormalTruck{id: "NT2", cargo: 0},
-		&ElectricTruck{id: "ET2", cargo: 0, battery: 100},
-		&NormalTruck{id: "NT1", cargo: 0},
-		&ElectricTruck{id: "ET1", cargo: 0, battery: 100},
-		&NormalTruck{id: "NT2", cargo: 0},
-		&ElectricTruck{id: "ET2", cargo: 0, battery: 100},
-		&NormalTruck{id: "NT1", cargo: 0},
-		&ElectricTruck{id: "ET1", cargo: 0, battery: 100},
-		&NormalTruck{id: "NT2", cargo: 0},
-		&ElectricTruck{id: "ET2", cargo: 0, battery: 100},
-		&NormalTruck{id: "NT1", cargo: 0},
-		&ElectricTruck{id: "ET1", cargo: 0, battery: 100},
-		&NormalTruck{id: "NT2", cargo: 0},
-		&ElectricTruck{id: "ET2", cargo: 0, battery: 100},
-		&NormalTruck{id: "NT1", cargo: 0},
-		&ElectricTruck{id: "ET1", cargo: 0, battery: 100},
-		&NormalTruck{id: "NT2", cargo: 0},
-		&ElectricTruck{id: "ET2", cargo: 0, battery: 100},
 	}
 
-	if err := processFleet(fleet); err != nil {
+	if err := processFleet(ctx, fleet); err != nil {
 		fmt.Printf("Error processing fleet: %v\n", err)
 		return
 	}
 
 	fmt.Printf("All trucks processed succesfully!")
-
-	// waiting for all goroutines to finish if not using wait group
-	//time.Sleep(5 * time.Second)
 
 }
