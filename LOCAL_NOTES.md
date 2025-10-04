@@ -64,6 +64,7 @@
 - Modify data in place
 - The ampersand (``&``) returns a reference to a memory location
 - The star (``*``) dereferences the variable to return the value
+### Goroutines
 
 ## Building a Server from TCP to HTTP
 
