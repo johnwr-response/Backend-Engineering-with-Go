@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"log"
 )
 
 var (
@@ -45,6 +46,15 @@ func (e *ElectricTruck) UnloadCargo() error {
 	return nil
 }
 
+/*
+// UnloadCargo : Note, this is the same as the one above
+func UnloadCargo(e *ElectricTruck) error {
+	e.cargo = 0
+	e.battery += -1
+	return nil
+}
+*/
+
 // processTruck handles the loading and unloading of a truck.
 func processTruck(truck Truck) error {
 	fmt.Printf("processing truck %+v\n", truck)
@@ -61,19 +71,39 @@ func processTruck(truck Truck) error {
 	return nil
 }
 
-//func main() {
-//	nt := &NormalTruck{id: "1"}
-//	et := &ElectricTruck{id: "2"}
-//
-//	err := processTruck(nt)
-//	if err != nil {
-//		log.Fatalf("Error processing truck %s\n", err)
-//	}
-//	err = processTruck(et)
-//	if err != nil {
-//		log.Fatalf("Error processing truck %s\n", err)
-//	}
-//	log.Println(nt.cargo)
-//	log.Println(et.battery)
-//
-//}
+func main() {
+	// first example
+	truckID := 42
+	anotherTruckID := &truckID
+	log.Println(truckID)
+	log.Println(&truckID)
+	log.Println(anotherTruckID)
+	truckID = 0
+	log.Println(*anotherTruckID)
+
+	// second example
+	t := NormalTruck{cargo: 0}
+	fillTruckCargo(&t)
+	log.Println(t)
+
+	// third example
+	var userID1 int
+	log.Println(userID1)
+	var userID2 *int
+	log.Println(userID2)
+	userID2 = &userID1
+	log.Println(*userID2)
+
+	// fourth example
+	t = NormalTruck{cargo: 0}
+	log.Printf("Address of t:%p\n", &t)
+	fillTruckCargo2(t)
+}
+
+func fillTruckCargo2(t NormalTruck) {
+	t.cargo = 100
+	log.Printf("Address of t:%p\n", &t)
+}
+func fillTruckCargo(t *NormalTruck) {
+	t.cargo = 100
+}
