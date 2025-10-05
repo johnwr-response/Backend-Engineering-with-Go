@@ -192,6 +192,13 @@ go: downloading google.golang.org/protobuf v1.36.8
 ## Databases
 ### The Repository Pattern
 [The Repository pattern in Go: a painless way to simplify your service logic](https://threedots.tech/post/repository-pattern-in-go/)
+### Implementing the Repository Pattern
+ ``` powershell
+  md social/internal/store"
+  ni social/internal/store/storage.go -type file -Value "package store`n`n"
+  ni social/internal/store/posts.go -type file -Value "package store`n`n"
+  ni social/internal/store/users.go -type file -Value "package store`n`n"
+  ```
 
 ## Posts CRUD
 

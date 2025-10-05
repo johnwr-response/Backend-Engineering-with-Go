@@ -9,4 +9,5 @@ func (app *application) healthCheckHandler(w http.ResponseWriter, _ *http.Reques
 	if err != nil {
 		return
 	}
+	//app.store.Posts.Create(r.Context())
 }
