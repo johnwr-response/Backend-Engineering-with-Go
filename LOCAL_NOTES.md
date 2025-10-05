@@ -73,6 +73,8 @@
 ### Maps
 - Maps are not concurrency safe
 - The concurrency file ran ok every time, but should supposedly create a race condition sometimes
+### Capstone Project (Exercise)
+### Capstone Project Solution
 
 ## Building a Server from TCP to HTTP
 
