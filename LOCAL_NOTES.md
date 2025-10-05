@@ -113,7 +113,7 @@ your own. Good luck and any question feel free to drop it in!
   - Golang migrate for migrations
 ```
 go mod init github.com/johnwr-response/Backend-Engineering-with-Go/social
-md social/bin,social/cmd/api,social/cmd/migrate/migrations,social/internal,social/docs,social/scripts,social/web
+md social/bin,social/cmd/api,social/cmd/migrate/migrations,social/internal/env,social/docs,social/scripts,social/web
 ``` 
 ### Clean Layered Architecture
 [Clean Architecture: A Craftsman's Guide to Software Structure and Design (Robert C. Martin Series) 1st Edition](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164)
@@ -169,6 +169,23 @@ go: downloading google.golang.org/protobuf v1.36.8
   ```shell
   cd social
   air
+  cd ..
+  ```
+### Environment Variables
+ ``` powershell
+  md social/internal/env"
+  ni social/internal/env/env.go -type file -Value "package env`n`n"
+  ni social/.env -type file -Value "`n"
+  ```
+- [The Twelve-Factor App Config](https://12factor.net/config)
+- [DirEnv](https://direnv.net) : An extension for your shell, augmenting it with a new feature that can load and unload environment variables depending on the current directory.  
+  Note: Not yet for windows, even though Powershell is supported
+- [](https://) : 
+- GoDotEnv - A Go port of Ruby's dotenv library (Loads environment variables from .env files).
+  [link](https://github.com/joho/godotenv)
+  ```shell
+  cd social
+  go get github.com/joho/godotenv
   cd ..
   ```
 
