@@ -54,16 +54,7 @@ func (e *ElectricTruck) UnloadCargo() error {
 
 // processTruck handles the loading and unloading of a truck.
 func processTruck(ctx context.Context, truck Truck) error {
-	fmt.Printf("started processing truck %+v\n", truck)
-
-	//// Simulate some processing time by adding a sleep
-	//time.Sleep(1 * time.Second)
-
-	/*
-		// how to access the userID from context
-		userID := ctx.Value(UserIdKey).(int)
-		log.Println(userID)
-	*/
+	//fmt.Printf("started processing truck %+v\n", truck)
 
 	ctx, cancel := context.WithTimeout(ctx, 2*time.Second)
 	defer cancel()
@@ -87,39 +78,54 @@ func processTruck(ctx context.Context, truck Truck) error {
 		return fmt.Errorf("error unloading cargo: %w\n", err)
 	}
 
-	fmt.Printf("finished processing truck %+v\n", truck)
-	return nil
+	//fmt.Printf("finished processing truck %+v\n", truck)
+	return ErrTruckNotFound
 }
 
 // processFleet demonstrates concurrent processing of multiple trucks
 func processFleet(ctx context.Context, trucks []Truck) error {
-	// Running synchronously
-	/*
-		for _, truck := range trucks {
-			_ = processTruck(truck)
-		}
-	*/
 
-	// Running asynchronously with wait groups
 	var wg sync.WaitGroup
-	//wg.Add(len(trucks)) // This would also work, instead of adding them one by one, but it's arguably better to do it within the loop
+	errorsChan := make(chan error, len(trucks))
+
 	for _, truck := range trucks {
 		wg.Add(1)
 		go func(truck Truck) {
 			if err := processTruck(ctx, truck); err != nil {
 				log.Println(err)
+				errorsChan <- err
 			}
 			wg.Done()
 		}(truck)
 	}
 	wg.Wait()
+	defer close(errorsChan)
 
+	var errs []error
+	for err := range errorsChan {
+		log.Printf("error processing truck %v\n", err)
+		errs = append(errs, err)
+	}
+
+	if len(errs) > 0 {
+		return fmt.Errorf("fleet processing had %d error(s)", len(errs))
+	}
 	return nil
+
+	//select {
+	//case err := <-errorsChan:
+	//	return err
+	//default:
+	//	return nil
+	//}
+
+	//close(errorsChan) // This is also perfectly valid instead of deferring
 }
 
 func main() {
+
 	ctx := context.Background()
-	ctx = context.WithValue(ctx, UserIdKey, 42)
+	//ctx = context.WithValue(ctx, UserIdKey, 42)
 
 	fleet := []Truck{
 		&NormalTruck{id: "NT1", cargo: 0},

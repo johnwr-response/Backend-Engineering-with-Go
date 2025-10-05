@@ -68,6 +68,7 @@
 ### Context and Timeouts
 - Context is immutable! You need to make a new context from a previous context if you want to change it
 - It is a convention to send the context as the first argument
+### Concurrency with Channels
 
 ## Building a Server from TCP to HTTP
 
