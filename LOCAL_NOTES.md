@@ -83,6 +83,13 @@ material and the course is for you to learn how to navigate the complex world of
 your own. Good luck and any question feel free to drop it in!
 
 ## Building a Server from TCP to HTTP
+### TCP Server - net package
+- Go documentation: [net](https://pkg.go.dev/net)
+- TCP is a reliable transmission protocol that runs on top of an unreliable protocol: IP
+- TCP offers two guaranties:
+  1. Reliable delivery - All packages are acknowledged, and retried if not.
+  2. Ordered delivery - All packages are ordered, and retried if missing.
+- TCP is a two-way connection protocol. The server and the client.
 
 ## Scaffolding our API Server
 
