@@ -93,6 +93,13 @@ your own. Good luck and any question feel free to drop it in!
 ### Understanding Routing
 ### HTTP Server - The net/http package
 - Go documentation: [http](https://pkg.go.dev/net/http)
+### Encoding & Decoding JSON Requests
+- Note! Windows Powershell uses an alias to Invoke-WebRequest. If so, switch to newer powershell or use the following:  
+``curl -method POST -v http://localhost:8080/users -Headers @{'Accept' = 'application/json'; 'Content-Type' = 'application/json'} -Body '{"first_name":"Tiago", "last_name": "User_123"}'``
+- Powershell users can use curl as normal:  
+``curl -i 'POST' http://localhost:8080/users -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"first_name":"Tiago", "last_name": "User_123"}'``
+- Using GET without headers is the same for both:  
+``curl http://localhost:8080/users``
 
 ## Scaffolding our API Server
 
