@@ -189,9 +189,9 @@ go: downloading google.golang.org/protobuf v1.36.8
   cd ..
   ```
 
-
-
 ## Databases
+### The Repository Pattern
+[The Repository pattern in Go: a painless way to simplify your service logic](https://threedots.tech/post/repository-pattern-in-go/)
 
 ## Posts CRUD
 
