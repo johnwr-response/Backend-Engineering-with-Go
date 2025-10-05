@@ -136,6 +136,41 @@ md social/bin,social/cmd/api,social/cmd/migrate/migrations,social/internal,socia
   go get -u github.com/go-chi/chi/v5/middleware
   cd ..
   ```
+### Hot Reloading in Go
+Note! This is and should be optional as it uses and downloads a lot of dependencies.  
+-[Air](https://github.com/air-verse/air) - Live reload for Go apps
+  ```shell
+  cd social
+  go install github.com/air-verse/air@latest
+go: downloading github.com/air-verse/air v1.63.0
+go: downloading github.com/gohugoio/hugo v0.149.1
+go: downloading dario.cat/mergo v1.0.2
+go: downloading github.com/fatih/color v1.18.0
+go: downloading github.com/fsnotify/fsnotify v1.9.0
+go: downloading github.com/pelletier/go-toml v1.9.5
+go: downloading golang.org/x/sys v0.35.0
+go: downloading github.com/mattn/go-colorable v0.1.14
+go: downloading golang.org/x/text v0.28.0
+go: downloading github.com/bep/godartsass/v2 v2.5.0
+go: downloading github.com/spf13/afero v1.14.0
+go: downloading github.com/spf13/cast v1.9.2
+go: downloading github.com/tdewolff/parse/v2 v2.8.3
+go: downloading github.com/pelletier/go-toml/v2 v2.2.4
+go: downloading github.com/gobwas/glob v0.2.3
+go: downloading github.com/bep/golibsass v1.2.0
+go: downloading google.golang.org/protobuf v1.36.8
+  cd ..
+  ```
+- You can initialize the .air.toml configuration file to the current directory with the default settings running the following command:
+  ```shell
+  air init
+  ```
+- To use air, simply execute air in the folder 
+  ```shell
+  cd social
+  air
+  cd ..
+  ```
 
 
 
