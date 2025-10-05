@@ -122,6 +122,20 @@ md social/bin,social/cmd/api,social/cmd/migrate/migrations,social/internal,socia
 - **Adaptability to Change** : By organizing your code in a modular and flexible way, you can more easily introduce more features, refactor existing code, and respond to evolving business requirements.  
   Your systems should be easy to change, if you have to change a lot of existing code to add a new feature you're doing it wrong.
 - **Focus on business value** : Focus on delivering value to your users, they are the ones who will be paying your bills at the end of the month. So focus on the business value.
+### Setting up the HTTP server and API
+  ``` powershell
+  ni social/cmd/api/main.go -type file -Value "package main`n`nfunc main() {`n`n}`n"
+  ni social/cmd/api/api.go -type file -Value "package main`n`n"
+  ni social/cmd/api/health.go -type file -Value "package main`n`n"
+  ```
+- Chi - A lightweight, idiomatic and composable router for building Go HTTP services.
+  [link](https://github.com/go-chi/chi)
+  ```shell
+  cd social
+  go get -u github.com/go-chi/chi/v5
+  go get -u github.com/go-chi/chi/v5/middleware
+  cd ..
+  ```
 
 
 
