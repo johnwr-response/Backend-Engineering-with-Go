@@ -102,6 +102,22 @@ your own. Good luck and any question feel free to drop it in!
 ``curl http://localhost:8080/users``
 
 ## Scaffolding our API Server
+### Setting up your Development Environment
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [Go API Mini Course for beginners Video](https://www.youtube.com/watch?v=7VLmLOiQ3ck&t=3647s)
+- Tech used in this course
+  - Go 1.22 or later
+  - Docker
+  - Postgres running on Docker
+  - Swagger for docs
+  - Golang migrate for migrations
+```
+go mod init github.com/johnwr-response/Backend-Engineering-with-Go/social
+md social/bin,social/cmd/api,social/cmd/migrate/migrations,social/internal,social/docs,social/scripts,social/web
+
+``` 
+
+
 
 ## Databases
 
