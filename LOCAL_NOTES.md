@@ -114,8 +114,14 @@ your own. Good luck and any question feel free to drop it in!
 ```
 go mod init github.com/johnwr-response/Backend-Engineering-with-Go/social
 md social/bin,social/cmd/api,social/cmd/migrate/migrations,social/internal,social/docs,social/scripts,social/web
-
 ``` 
+### Clean Layered Architecture
+[Clean Architecture: A Craftsman's Guide to Software Structure and Design (Robert C. Martin Series) 1st Edition](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164)
+- **Separation of concerns** : Each level in your program should be separated by a clear barrier, the transport layer, the service layer, the storage layer, etc.
+- **Dependency Inversion Principle (DIP)**: You're injecting the dependencies in your layers. Tou don't directly call them! Why? It promotes loose coupling and makes it easier to test your programs.
+- **Adaptability to Change** : By organizing your code in a modular and flexible way, you can more easily introduce more features, refactor existing code, and respond to evolving business requirements.  
+  Your systems should be easy to change, if you have to change a lot of existing code to add a new feature you're doing it wrong.
+- **Focus on business value** : Focus on delivering value to your users, they are the ones who will be paying your bills at the end of the month. So focus on the business value.
 
 
 
