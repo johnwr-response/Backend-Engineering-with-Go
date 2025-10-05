@@ -76,6 +76,11 @@
 ### Capstone Project (Exercise)
 ### Capstone Project Solution
 ### Map Concurrency & Mutexes
+### Final word
+Now that you've got the essential parts of Go covered, **you're ready to start building real awesome projects.** From
+the next section forwards we'll start diving deeper into the world of building web APIs with Go. My goal with this
+material and the course is for you to learn how to navigate the complex world of building production grade software by
+your own. Good luck and any question feel free to drop it in!
 
 ## Building a Server from TCP to HTTP
 
