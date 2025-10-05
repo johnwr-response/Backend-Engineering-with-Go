@@ -69,6 +69,10 @@
 - Context is immutable! You need to make a new context from a previous context if you want to change it
 - It is a convention to send the context as the first argument
 ### Concurrency with Channels
+- NB! Main code not working due to insufficient showing of used methods by instructor
+### Maps
+- Maps are not concurrency safe
+- The concurrency file ran ok every time, but should supposedly create a race condition sometimes
 
 ## Building a Server from TCP to HTTP
 

@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"maps"
 	"sync"
 	"time"
 )
@@ -123,9 +124,26 @@ func processFleet(ctx context.Context, trucks []Truck) error {
 }
 
 func main() {
+	// Maps
+	// Key value store { a: 1, b: 2 } O(1) get(a) > 1
+	// [1,2,3,4,5,6] O(n)
+	m := make(map[string]int)
+	_, exists := m["a"]
+	if _, ok := m["a"]; ok {
+		log.Println("a")
+	}
+	if !exists {
+		log.Println("no a")
+	} else {
+		log.Println("a")
+	}
+	delete(m, "a")
+	clear(m)
+	maps.Clone(m)
+	maps.Equal(m, m)
 
 	ctx := context.Background()
-	//ctx = context.WithValue(ctx, UserIdKey, 42)
+	ctx = context.WithValue(ctx, UserIdKey, 42)
 
 	fleet := []Truck{
 		&NormalTruck{id: "NT1", cargo: 0},
