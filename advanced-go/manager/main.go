@@ -1,12 +1,15 @@
 package main
 
-import "errors"
+import (
+	"errors"
+	"sync"
+)
 
 var ErrTruckNotFound = errors.New("truck not found")
 
 type FleetManager interface {
 	AddTruck(id string, cargo int) error
-	GetTruck(id string) (*Truck, error)
+	GetTruck(id string) (Truck, error)
 	RemoveTruck(id string) error
 	UpdateTruckCargo(id string, cargo int) error
 }
@@ -18,6 +21,7 @@ type Truck struct {
 
 type TruckManager struct {
 	trucks map[string]*Truck
+	sync.RWMutex
 }
 
 func NewTruckManager() TruckManager {
@@ -27,18 +31,24 @@ func NewTruckManager() TruckManager {
 }
 
 func (tm *TruckManager) AddTruck(id string, cargo int) error {
+	tm.Lock()
+	defer tm.Unlock()
 	tm.trucks[id] = &Truck{ID: id, Cargo: cargo}
 	return nil
 }
 
-func (tm *TruckManager) GetTruck(id string) (*Truck, error) {
+func (tm *TruckManager) GetTruck(id string) (Truck, error) {
+	tm.RLock()
+	defer tm.RUnlock()
 	truck, ok := tm.trucks[id]
 	if !ok {
-		return nil, ErrTruckNotFound
+		return Truck{}, ErrTruckNotFound
 	}
-	return truck, nil
+	return *truck, nil
 }
 func (tm *TruckManager) RemoveTruck(id string) error {
+	tm.Lock()
+	defer tm.Unlock()
 	_, ok := tm.trucks[id]
 	if !ok {
 		return ErrTruckNotFound
@@ -47,6 +57,8 @@ func (tm *TruckManager) RemoveTruck(id string) error {
 	return nil
 }
 func (tm *TruckManager) UpdateTruckCargo(id string, cargo int) error {
+	tm.Lock()
+	defer tm.Unlock()
 	_, ok := tm.trucks[id]
 	if !ok {
 		return ErrTruckNotFound
