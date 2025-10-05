@@ -90,6 +90,7 @@ your own. Good luck and any question feel free to drop it in!
   1. Reliable delivery - All packages are acknowledged, and retried if not.
   2. Ordered delivery - All packages are ordered, and retried if missing.
 - TCP is a two-way connection protocol. The server and the client.
+### Understanding Routing
 
 ## Scaffolding our API Server
 
