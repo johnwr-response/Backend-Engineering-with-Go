@@ -130,6 +130,7 @@ md social/bin,social/cmd/api,social/cmd/migrate/migrations,social/internal/env,s
   ```
 - Chi - A lightweight, idiomatic and composable router for building Go HTTP services.
   [link](https://github.com/go-chi/chi)
+    - Adds no transient dependencies
   ```shell
   cd social
   go get -u github.com/go-chi/chi/v5
@@ -180,9 +181,9 @@ go: downloading google.golang.org/protobuf v1.36.8
 - [The Twelve-Factor App Config](https://12factor.net/config)
 - [DirEnv](https://direnv.net) : An extension for your shell, augmenting it with a new feature that can load and unload environment variables depending on the current directory.  
   Note: Not yet for windows, even though Powershell is supported
-- [](https://) : 
 - GoDotEnv - A Go port of Ruby's dotenv library (Loads environment variables from .env files).
   [link](https://github.com/joho/godotenv)
+    - Adds no transient dependencies
   ```shell
   cd social
   go get github.com/joho/godotenv
@@ -199,6 +200,41 @@ go: downloading google.golang.org/protobuf v1.36.8
   ni social/internal/store/posts.go -type file -Value "package store`n`n"
   ni social/internal/store/users.go -type file -Value "package store`n`n"
   ```
+### Persisting data with SQL
+- [sqlx](https://github.com/jmoiron/sqlx) : general purpose extensions to golang's database/sql
+    - Adds unchecked number of transient dependencies
+- [SQLBoiler](https://github.com/aarondl/sqlboiler) : Generate a Go ORM tailored to your database schema.
+    - Adds unchecked number of transient dependencies
+- [gorm](https://github.com/go-gorm/gorm) : The fantastic ORM library for Golang, aims to be developer friendly
+    - Adds unchecked number of transient dependencies
+- [pg](https://github.com/go-pg/pg/v1) : PostgresSQL driver and toolkit for Go
+    - Adds the following transient dependencies:
+      - `github.com/go-pg/zerochecker`
+      - `github.com/jinzhu/inflection`
+      - `github.com/tmthrgd/go-hex`
+      - `github.com/vmihailenco/msgpack/v5`
+      - `github.com/vmihailenco/tagparser`
+      - `go.opentelemetry.io/otel`
+      - `go.opentelemetry.io/otel/metric`
+      - `go.opentelemetry.io/otel/trace`
+      - `golang.org/x/sys`
+      - `mellium.im/sasl`
+- ```shell
+  cd social 
+  go get github.com/go-pg/pg/v1
+  cd ..
+  ```
+- [pgx](https://github.com/jackc/pgx) : PostgresSQL driver and toolkit for Go
+    - Adds the following transient dependencies:
+      - `golang.org/x/text`
+      - `golang.org/x/crypto`
+      - `github.com/pkg/errors`
+  ```shell
+  cd social 
+  go get github.com/jackc/pgx
+  cd ..
+  ```
+
 
 ## Posts CRUD
 
