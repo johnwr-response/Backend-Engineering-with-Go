@@ -207,7 +207,7 @@ go: downloading google.golang.org/protobuf v1.36.8
     - Adds unchecked number of transient dependencies
 - [gorm](https://github.com/go-gorm/gorm) : The fantastic ORM library for Golang, aims to be developer friendly
     - Adds unchecked number of transient dependencies
-- [pg](https://github.com/go-pg/pg/v1) : PostgresSQL driver and toolkit for Go
+- [pg](https://github.com/go-pg/pg/v11) : PostgresSQL driver and toolkit for Go
     - Adds the following transient dependencies:
       - `github.com/go-pg/zerochecker`
       - `github.com/jinzhu/inflection`
@@ -221,7 +221,7 @@ go: downloading google.golang.org/protobuf v1.36.8
       - `mellium.im/sasl`
 - ```shell
   cd social 
-  go get github.com/go-pg/pg/v1
+  go get github.com/go-pg/pg/v11
   cd ..
   ```
 - [pgx](https://github.com/jackc/pgx) : PostgresSQL driver and toolkit for Go
@@ -231,10 +231,22 @@ go: downloading google.golang.org/protobuf v1.36.8
       - `github.com/pkg/errors`
   ```shell
   cd social 
-  go get github.com/jackc/pgx
+  go get github.com/jackc/pgx/v5
   cd ..
   ```
-
+### Configuring the DB Connection Pool
+ ``` powershell
+  md social/internal/db
+  ni social/internal/db/db.go -type file -Value "package db`n`n"
+  ni social/scripts/db-init.sql -type file -Value "CREATE DATABASE social;`n"
+  ni social/docker-compose.yaml -type file
+  ```
+- Run database:
+  ```
+  cd social
+  docker compose up --build
+  cd ..
+  ```
 
 ## Posts CRUD
 
