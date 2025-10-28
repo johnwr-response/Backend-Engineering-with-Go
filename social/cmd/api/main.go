@@ -11,6 +11,8 @@ import (
 	"github.com/joho/godotenv"
 )
 
+const version = "0.0.1"
+
 func main() {
 	err := godotenv.Load()
 	if err != nil {
@@ -25,6 +27,7 @@ func main() {
 			maxIdleCons: env.GetInt("DB_MAX_IDLE_CONS", 30),
 			maxIdleTime: env.GetString("DB_MAX_IDLE_TIME", "15m"),
 		},
+		env: env.GetString("APP_ENV", "development"),
 	}
 
 	db, err := internaldb.New(

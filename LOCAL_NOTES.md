@@ -270,8 +270,13 @@ go: downloading google.golang.org/protobuf v1.36.8
   make migrate-up
   ````
 
-
 ## Posts CRUD
+### Marshalling JSON responses
+- [W3schools JSON](https://www.w3schools.com/js/js_json.asp)
+ ``` powershell
+  curl http://localhost:8080/v1/health
+  ni social/cmd/api/json.go -type file -Value "package main`n`n"
+  ```
 
 ## User Feed
 
