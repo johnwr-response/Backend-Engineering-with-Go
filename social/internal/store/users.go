@@ -23,7 +23,7 @@ func (s *UserStore) Create(ctx context.Context, user *User) error {
 	//goland:noinspection ALL
 	query := `
 		INSERT INTO users(username, password, email) 
-		VALUES (%1, %2, %3) 
+		VALUES ($1, $2, $3) 
 		RETURNING id, created_at
 	`
 	err := s.db.QueryRowContext(

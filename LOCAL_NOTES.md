@@ -207,7 +207,7 @@ go: downloading google.golang.org/protobuf v1.36.8
     - Adds unchecked number of transient dependencies
 - [gorm](https://github.com/go-gorm/gorm) : The fantastic ORM library for Golang, aims to be developer friendly
     - Adds unchecked number of transient dependencies
-- [pg](https://github.com/go-pg/pg/v11) : PostgresSQL driver and toolkit for Go
+- [pg](https://github.com/go-pg/pg/v10) : PostgresSQL driver and toolkit for Go
     - Adds the following transient dependencies:
       - `github.com/go-pg/zerochecker`
       - `github.com/jinzhu/inflection`
@@ -221,7 +221,7 @@ go: downloading google.golang.org/protobuf v1.36.8
       - `mellium.im/sasl`
 - ```shell
   cd social 
-  go get github.com/go-pg/pg/v11
+  go get github.com/go-pg/pg/v10
   cd ..
   ```
 - [pgx](https://github.com/jackc/pgx) : PostgresSQL driver and toolkit for Go
@@ -277,6 +277,13 @@ go: downloading google.golang.org/protobuf v1.36.8
   curl http://localhost:8080/v1/health
   ni social/cmd/api/json.go -type file -Value "package main`n`n"
   ```
+### Creating a User Feed Post
+ ``` powershell
+  ni social/cmd/api/posts.go -type file -Value "package main`n`n"
+  curl -i 'POST' http://localhost:8080/v1/posts -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"title":"New post", "content": "Hey guys! This is my first post", "tags": ["tag1"],}'
+  make migration alter_posts_with_tags_updated
+  ```
+
 
 ## User Feed
 
