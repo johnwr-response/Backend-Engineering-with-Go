@@ -238,7 +238,7 @@ go: downloading google.golang.org/protobuf v1.36.8
  ``` powershell
   md social/internal/db
   ni social/internal/db/db.go -type file -Value "package db`n`n"
-  ni social/scripts/db-init.sql -type file -Value "CREATE DATABASE social;`n"
+  ni social/scripts/db-init.sql -type file -Value "CREATE DATABASE social_network;`n"
   ni social/docker-compose.yaml -type file
   ```
 - Run database:
@@ -247,6 +247,29 @@ go: downloading google.golang.org/protobuf v1.36.8
   docker compose up --build
   cd ..
   ```
+### SQL Migrations
+- [migrate](https://github.com/golang-migrate/migrate/tree/master/cmd/migrate) : Database migrations. CLI and Golang library.
+- [goose](https://github.com/pressly/goose) : A database migration tool. Supports SQL migrations and Go functions.
+- [PostgresSQL CItext](https://www.postgresql.org/docs/current/citext.html) : A case-insensitive character string type
+- [GNU Make](https://gnuwin32.sourceforge.net/packages/make.htm)
+  - Install: ```winget install -e --id GnuWin32.Make```
+- [Create migration]
+  ```migrate create -seq -ext sql -dir .\cmd\migrate\migrations\ create_users```
+- [Run migration]
+  ```migrate -verbose -database "postgres://admin:adminPassword@localhost/social_network?sslmode=disable" -source file://./cmd/migrate/migrations up```
+  ```migrate -verbose -database "postgres://admin:adminPassword@localhost/social_network?sslmode=disable" -source file://./cmd/migrate/migrations down```
+- [Create makefile]
+  ```ni social/Makefile -type file```
+- [Run migrations via make]
+  ````
+  make migrate-down
+  make migrate-up
+  make migration posts-create
+  make migrate-up
+  make migration alter-post-table
+  make migrate-up
+  ````
+
 
 ## Posts CRUD
 
