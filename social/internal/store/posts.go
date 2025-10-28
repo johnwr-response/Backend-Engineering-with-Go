@@ -4,9 +4,12 @@ import (
 	"context"
 	"database/sql"
 	"encoding/gob"
+	"errors"
 	"log"
 
 	"time"
+
+	_ "github.com/go-pg/pg/v10"
 )
 
 type Post struct {
@@ -44,4 +47,34 @@ func (s *PostStore) Create(ctx context.Context, post *Post) error {
 	}
 
 	return nil
+}
+func (s *PostStore) GetByID(ctx context.Context, id int64) (*Post, error) {
+	query := `
+-- 		SELECT id, user_id, title, content, created_at, updated_at, tags
+		SELECT id, user_id, title, content, created_at, updated_at
+		FROM posts 
+		WHERE id = $1
+	`
+
+	var post Post
+	err := s.db.QueryRowContext(ctx, query, id).Scan(
+		&post.ID,
+		&post.UserID,
+		&post.Title,
+		&post.Content,
+		&post.CreatedAt,
+		&post.UpdatedAt,
+		// Arrays are not currently working. Fix later by testing different ORMs, like bun or gorm
+		//pg.Array(&post.Tags),
+	)
+	if err != nil {
+		switch {
+		case errors.Is(err, sql.ErrNoRows):
+			return nil, ErrNotFound
+		default:
+			return nil, err
+		}
+	}
+
+	return &post, nil
 }

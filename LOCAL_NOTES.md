@@ -283,7 +283,11 @@ go: downloading google.golang.org/protobuf v1.36.8
   curl -i 'POST' http://localhost:8080/v1/posts -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"title":"New post", "content": "Hey guys! This is my first post", "tags": ["tag1"],}'
   make migration alter_posts_with_tags_updated
   ```
-
+### Getting a Post From a User
+### Internal Errors Package
+ ``` powershell
+  ni social/cmd/api/errors.go -type file -Value "package main`n`n"
+  ```
 
 ## User Feed
 
