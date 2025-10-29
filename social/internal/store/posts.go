@@ -9,7 +9,7 @@ import (
 
 	"time"
 
-	_ "github.com/go-pg/pg/v10"
+	"github.com/lib/pq"
 )
 
 type Post struct {
@@ -37,9 +37,7 @@ func (s *PostStore) Create(ctx context.Context, post *Post) error {
 	`
 	gob.Register(post.Tags)
 	err := s.db.QueryRowContext(
-		ctx, query, post.Content, post.Title, post.UserID, nil,
-		// Arrays are not currently working. Fix later by testing different ORMs, like bun or gorm
-		//ctx, query, post.Content, post.Title, post.UserID, pg.Array(post.Tags),
+		ctx, query, post.Content, post.Title, post.UserID, pq.Array(post.Tags),
 	).Scan(&post.ID, &post.CreatedAt, &post.UpdatedAt)
 	if err != nil {
 		log.Printf("Tags type: %T", post.Tags)
@@ -51,8 +49,7 @@ func (s *PostStore) Create(ctx context.Context, post *Post) error {
 }
 func (s *PostStore) GetByID(ctx context.Context, id int64) (*Post, error) {
 	query := `
--- 		SELECT id, user_id, title, content, created_at, updated_at, tags
-		SELECT id, user_id, title, content, created_at, updated_at
+		SELECT id, user_id, title, content, created_at, updated_at, tags
 		FROM posts 
 		WHERE id = $1
 	`
@@ -65,9 +62,7 @@ func (s *PostStore) GetByID(ctx context.Context, id int64) (*Post, error) {
 		&post.Content,
 		&post.CreatedAt,
 		&post.UpdatedAt,
-		// Arrays are not currently working. Fix later by testing different ORMs, like bun or gorm
-		// OR is this just a matter of wrong library? Should it have been from https://github.com/lib/pq pq.Array instead of pg.Array?
-		//pg.Array(&post.Tags),
+		pq.Array(&post.Tags),
 	)
 	if err != nil {
 		switch {
