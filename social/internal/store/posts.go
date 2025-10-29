@@ -20,6 +20,7 @@ type Post struct {
 	Tags      []string  `pg:",array"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
+	Comments  []Comment `json:"comments"`
 }
 
 type PostStore struct {
@@ -65,6 +66,7 @@ func (s *PostStore) GetByID(ctx context.Context, id int64) (*Post, error) {
 		&post.CreatedAt,
 		&post.UpdatedAt,
 		// Arrays are not currently working. Fix later by testing different ORMs, like bun or gorm
+		// OR is this just a matter of wrong library? Should it have been from https://github.com/lib/pq pq.Array instead of pg.Array?
 		//pg.Array(&post.Tags),
 	)
 	if err != nil {

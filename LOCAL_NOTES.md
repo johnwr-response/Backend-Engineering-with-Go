@@ -304,6 +304,11 @@ go: downloading google.golang.org/protobuf v1.36.8
 - [Article on SQL Joins](https://www.dataquest.io/blog/sql-joins/)
 - SQL Cheat sheet:  
   ![SQL Cheat sheet](DB+Relationships+SQL+Joins+Backend+Engineering+with+Go.jpg)
+### Adding Comments to Posts
+  ``` shell
+  make migration add_comments
+  ni social/internal/store/comments.go -type file -Value "package store`n`n"
+  ```
 
 ## User Feed
 
