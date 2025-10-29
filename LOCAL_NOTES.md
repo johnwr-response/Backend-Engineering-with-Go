@@ -300,7 +300,10 @@ go: downloading google.golang.org/protobuf v1.36.8
   go get github.com/go-playground/validator/v10
   cd ..
   ```
-
+### DB Relationships & SQL Joins
+- [Article on SQL Joins](https://www.dataquest.io/blog/sql-joins/)
+- SQL Cheat sheet:  
+  ![SQL Cheat sheet](DB+Relationships+SQL+Joins+Backend+Engineering+with+Go.jpg)
 
 ## User Feed
 
