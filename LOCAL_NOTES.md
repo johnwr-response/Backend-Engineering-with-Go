@@ -288,6 +288,19 @@ go: downloading google.golang.org/protobuf v1.36.8
  ``` powershell
   ni social/cmd/api/errors.go -type file -Value "package main`n`n"
   ```
+### HTTP Payload Validation
+- [Package validator](https://github.com/go-playground/validator) : Go Struct and Field validation, including Cross Field, Cross Struct, Map, Slice and Array diving
+    - Adds the following transient dependencies:
+        - `github.com/go-playground/locales`
+        - `github.com/go-playground/universal-translator`
+        - `github.com/gabriel-vasile/mimetype`
+        - `github.com/leodido/go-urn`
+  ```shell
+  cd social 
+  go get github.com/go-playground/validator/v10
+  cd ..
+  ```
+
 
 ## User Feed
 
