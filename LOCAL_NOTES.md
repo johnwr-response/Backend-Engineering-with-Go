@@ -315,6 +315,7 @@ go: downloading google.golang.org/protobuf v1.36.8
   curl -X 'PATCH' http://localhost:8080/v1/posts/35 -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"title":"New post"}'
   curl -X 'PATCH' http://localhost:8080/v1/posts/35 -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"title":"New post", "content": "Hello World!"}'
   ```
+### Standardising JSON Responses
 
 
 ## User Feed
