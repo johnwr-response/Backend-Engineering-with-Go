@@ -309,6 +309,13 @@ go: downloading google.golang.org/protobuf v1.36.8
   make migration add_comments
   ni social/internal/store/comments.go -type file -Value "package store`n`n"
   ```
+### Updating and Deleting Posts
+  ``` shell
+  curl -X 'DELETE' http://localhost:8080/v1/posts/35
+  curl -X 'PATCH' http://localhost:8080/v1/posts/35 -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"title":"New post"}'
+  curl -X 'PATCH' http://localhost:8080/v1/posts/35 -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"title":"New post", "content": "Hello World!"}'
+  ```
+
 
 ## User Feed
 
