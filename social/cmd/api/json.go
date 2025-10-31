@@ -21,8 +21,6 @@ func writeJSON(w http.ResponseWriter, status int, data any) error {
 }
 
 // readJSON reads JSON data
-//
-//goland:noinspection GoUnusedFunction
 func readJSON(w http.ResponseWriter, r *http.Request, data any) error {
 	maxBytes := 1_048_578 // 1MB
 	r.Body = http.MaxBytesReader(w, r.Body, int64(maxBytes))
