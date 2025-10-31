@@ -156,6 +156,12 @@ func (app *application) postsContextMiddleware(next http.Handler) http.Handler {
 	})
 }
 
+func (app *application) commentPostHandler(_ http.ResponseWriter, _ *http.Request) {
+	// Validate a JSON payload with the comment text (maybe other metadata like "likes" as well).
+	// Validate if the post in question exists.
+	// Create the comment on the post.
+}
+
 func getPostFromCtx(r *http.Request) *store.Post {
 	post, _ := r.Context().Value(postCtx).(*store.Post)
 	return post

@@ -334,6 +334,10 @@ go: downloading google.golang.org/protobuf v1.36.8
   1. Remove the surrounding quotes from your .envrc variables.
   2. Make sure add the ?sslmode=disable at the end of the connection string.
   3. Docker image of postgres is conflicting with an older one -> Delete volumes and containers.
+### Assignment: Challenge: Create Comments for Posts
+- Our front-end team is currently working on the UI for adding comments to posts on the UI.
+  Please, add the backend functionality to support this feature.
+  Make a new endpoint that allows users to create comments to posts, just like we did manually.
 
 
 ## User Feed
