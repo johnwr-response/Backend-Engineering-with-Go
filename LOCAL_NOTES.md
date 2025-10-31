@@ -328,6 +328,12 @@ go: downloading google.golang.org/protobuf v1.36.8
   md social/cmd/migrate/seed
   ni social/cmd/migrate/seed/main.go -type file -Value "package main`n`n"
   ```
+### Database Seeding: "SSL not enabled" problem
+- Some students are getting the "SSL not enabled" problem.
+- Here are some common solutions to that problem:
+  1. Remove the surrounding quotes from your .envrc variables.
+  2. Make sure add the ?sslmode=disable at the end of the connection string.
+  3. Docker image of postgres is conflicting with an older one -> Delete volumes and containers.
 
 
 ## User Feed
