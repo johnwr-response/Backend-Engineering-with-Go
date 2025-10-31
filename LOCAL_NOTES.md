@@ -339,8 +339,12 @@ go: downloading google.golang.org/protobuf v1.36.8
   Please, add the backend functionality to support this feature.
   Make a new endpoint that allows users to create comments to posts, just like we did manually.
 
-
 ## User Feed
+### Creating the User Profile
+  ``` shell
+  ni social/cmd/api/users.go -type file -Value "package main`n`n"
+  ```
+
 
 ## Filtering, Sorting, and Pagination
 
