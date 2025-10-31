@@ -13,6 +13,10 @@ migrate-up:
 migrate-down:
 	@migrate -source=file://$(MIGRATIONS_PATH) -database=$(DB_ADDR) down $(filter-out $@,$(MAKECMDGOALS))
 
+.PHONY: seed
+seed:
+	@go run ./cmd/migrate/seed/main.go
+
 .PHONY: docker-up
 docker-up:
 	docker compose up -d

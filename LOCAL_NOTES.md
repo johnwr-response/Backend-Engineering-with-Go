@@ -322,6 +322,12 @@ go: downloading google.golang.org/protobuf v1.36.8
   go run .\concurrency-test\main.go
   ```
 ### Managing SQL Query Timeouts
+### Database Seeding
+  ``` shell
+  ni social/internal/db/seed.go -type file -Value "package db`n`n"
+  md social/cmd/migrate/seed
+  ni social/cmd/migrate/seed/main.go -type file -Value "package main`n`n"
+  ```
 
 
 ## User Feed

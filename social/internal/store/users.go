@@ -23,8 +23,8 @@ type UserStore struct {
 func (s *UserStore) Create(ctx context.Context, user *User) error {
 	//goland:noinspection ALL
 	query := `
-		INSERT INTO users(username, password, email) 
-		VALUES ($1, $2, $3) 
+		INSERT INTO users(username, first_name, last_name, password, email) 
+		VALUES ($1, $2, $3, $4, $5) 
 		RETURNING id, created_at
 	`
 
@@ -32,7 +32,7 @@ func (s *UserStore) Create(ctx context.Context, user *User) error {
 	defer cancel()
 
 	err := s.db.QueryRowContext(
-		ctx, query, user.Username, user.Password, user.Email,
+		ctx, query, user.Username, user.FirstName, user.LastName, user.Password, user.Email,
 	).Scan(&user.ID, &user.CreatedAt)
 	if err != nil {
 		return err
