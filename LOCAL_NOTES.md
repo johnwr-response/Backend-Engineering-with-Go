@@ -341,8 +341,16 @@ go: downloading google.golang.org/protobuf v1.36.8
 
 ## User Feed
 ### Creating the User Profile
+- Tip: Use Thunder Client for VS Code for graphical REST client
   ``` shell
   ni social/cmd/api/users.go -type file -Value "package main`n`n"
+  ```
+### Adding Followers
+- [PGErrCode](https://github.com/jackc/pgerrcode) : Package pgerrcode contains constants for PostgreSQL error codes.
+    - Adds no transient dependencies
+  ``` shell
+  make migration add_followers_table
+  ni social/internal/store/followers.go -type file -Value "package store`n`n"
   ```
 
 
